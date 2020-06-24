@@ -19,13 +19,7 @@ class BSTNode:
 
     # Insert the given value into the tree
     def insert(self, value):
-        if self.contains(value):
-            if self.right:
-                return self.right.insert(value)
-            else:
-                self.right = BSTNode(value)
-                return True
-        elif value <= self.value:
+        if value < self.value:
             if self.left:
                 return self.left.insert(value)
             else:
@@ -88,6 +82,7 @@ class BSTNode:
 
     # Print the value of every node, starting with the given node,
     # in an iterative breadth first traversal
+
     def bft_print(self, node):
         pass
 
