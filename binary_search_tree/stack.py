@@ -18,7 +18,7 @@ class Stack:
         self.size = 0
         self.storage = LinkedList()
 
-    def __len__(self):
+    def len(self):
         return self.size
 
     def push(self, value):
@@ -34,13 +34,13 @@ class Stack:
         return node
 
 
-new_stack = Stack()
-print(len(new_stack))
-new_stack.push(2)
-new_stack.push(3)
-new_stack.push(4)
-print(len(new_stack))
-print(new_stack.storage)
+# new_stack = Stack()
+# print(len(new_stack))
+# new_stack.push(2)
+# new_stack.push(3)
+# new_stack.push(4)
+# print(len(new_stack))
+# print(new_stack.storage)
 
 # class Empty(Exception):
 #     pass
