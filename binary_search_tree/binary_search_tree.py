@@ -1,3 +1,5 @@
+from queue import Queue
+from stack import Stack
 """
 Binary search trees are a data structure that enforce an ordering over 
 the data they store. That ordering in turn makes it a lot more efficient 
@@ -59,13 +61,12 @@ class BSTNode:
     # Call the function `fn` on the value of each node
 
     def for_each(self, fn):
-        current = self
-        if current:
-            fn(current.value)
-            if current.left:
-                current.left.for_each(fn)
-            if current.right:
-                current.right.for_each(fn)
+        if self:
+            fn(self.value)
+            if self.left:
+                self.left.for_each(fn)
+            if self.right:
+                self.right.for_each(fn)
 
     # Part 2 -----------------------
 
@@ -75,29 +76,63 @@ class BSTNode:
     def in_order_print(self, node):
         if node:
             self.in_order_print(node.left)
-
             print(node.value)
-
             self.in_order_print(node.right)
 
     # Print the value of every node, starting with the given node,
     # in an iterative breadth first traversal
 
     def bft_print(self, node):
-        pass
+        # create a queue for nodes
+        queue = Queue()
+        # add first node to queue
+        queue.enqueue(node)
+        # while queue isn't empty
+        while queue.len() != 0:
+            # remove the first node from the queue
+            popped = queue.dequeue()
+            # print the removed node
+            print(popped.value)
+            # add the children into the queue
+            if popped.left:
+                queue.enqueue(popped.left)
+            if popped.right:
+                queue.enqueue(popped.right)
 
     # Print the value of every node, starting with the given node,
     # in an iterative depth first traversal
+
     def dft_print(self, node):
-        pass
+        # create stack for nodes
+        stack = Stack()
+        # add the first node to stack
+        stack.push(node)
 
-    # Stretch Goals -------------------------
-    # Note: Research may be required
+        # while the stack isn't empty
+        while stack.len() != 0:
+            # get the current node from the top
+            current = stack.pop()
 
-    # Print Pre-order recursive DFT
+            print(current.value)
+
+            if current.left:
+                stack.push(current.left)
+            if current.right:
+                stack.push(current.right)
+
+        # Stretch Goals -------------------------
+        # Note: Research may be required
+
+        # Print Pre-order recursive DFT
     def pre_order_dft(self, node):
-        pass
+        if node:
+            print(node.value)
+            self.pre_order_dft(node.left)
+            self.pre_order_dft(node.right)
 
     # Print Post-order recursive DFT
     def post_order_dft(self, node):
-        pass
+        if node:
+            self.post_order_dft(node.left)
+            self.post_order_dft(node.right)
+            print(node.value)
